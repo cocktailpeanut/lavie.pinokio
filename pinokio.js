@@ -13,6 +13,10 @@ module.exports = {
         type: "label"
       }, {
         when: "start.json",
+        on: "<i class='fa-solid fa-terminal'></i> Server",
+        href: "start.json?fullscreen=true"
+      }, {
+        when: "start.json",
         off: "<i class='fa-solid fa-power-off'></i> Start",
         href: "start.json?fullscreen=true&run=true",
       }, {
