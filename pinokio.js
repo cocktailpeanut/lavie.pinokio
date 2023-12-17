@@ -3,32 +3,61 @@ module.exports = {
   description: "Text-to-Video (T2V) generation framework from Vchitect https://github.com/Vchitect/LaVie",
   icon: "icon.jpeg",
   menu: async (kernel) => {
+    let installing = await kernel.running(__dirname, "install.json")
     let installed = await kernel.exists(__dirname, "env")
-    if (installed) {
-      let session = await kernel.require(__dirname, "session.json")
-      console.log("session", session)
+    let running = await kernel.running(__dirname, "start.json")
+    if (installing) {
       return [{
-        when: "start.json",
-        on: "<i class='fa-solid fa-spin fa-circle-notch'></i> Running",
-        type: "label"
-      }, {
-        when: "start.json",
-        on: "<i class='fa-solid fa-terminal'></i> Server",
-        href: "start.json?fullscreen=true"
-      }, {
-        when: "start.json",
-        off: "<i class='fa-solid fa-power-off'></i> Start",
-        href: "start.json?fullscreen=true&run=true",
-      }, {
-        when: "start.json",
-        on: "<i class='fa-solid fa-rocket'></i> Launch",
-        href: (session && session.url ? session.url : "http://127.0.0.1:7860"),
-        target: "_blank"
+        icon: "fa-solid fa-plug",
+        text: "Installing",
+        href: "install.json",
+        params: { fullscreen: true }
       }]
+    } else if (installed) {
+      if (running) {
+        let session = await kernel.require(__dirname, "session.json")
+        if (session && session.url) {
+          return [{
+            icon: 'fa-solid fa-spin fa-circle-notch',
+            text: 'Running",
+            type: "label"
+          }, {
+            icon: 'fa-solid fa-terminal',
+            text: "Terminal",
+            href: "start.json",
+            params: { fullscreen: true }
+          }, {
+            icon: "fa-solid fa-rocket",
+            text: "Start",
+            href: session.url,
+            target: "_blank"
+          }]
+        } else {
+          return [{
+            icon: 'fa-solid fa-spin fa-circle-notch',
+            text: 'Running",
+            type: "label"
+          }, {
+            icon: 'fa-solid fa-terminal',
+            text: "Terminal",
+            href: "start.json",
+            params: { fullscreen: true }
+          }]
+        }
+      } else {
+        return [{
+          icon: "fa-solid fa-power-off",
+          text: "Start",
+          href: "start.json",
+          params: { fullscreen: true, run: true }
+        }]
+      }
     } else {
       return [{
-        html: '<i class="fa-solid fa-plug"></i> Install',
-        href: "install.json?run=true&fullscreen=true"
+        icon: "fa-solid fa-plug",
+        text: "Install",
+        href: "install.json",
+        params: { run: true, fullscreen: true }
       }]
     }
   }
