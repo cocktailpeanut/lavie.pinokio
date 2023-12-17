@@ -35,7 +35,7 @@ module.exports = {
         } else {
           return [{
             icon: 'fa-solid fa-spin fa-circle-notch',
-            text: 'Running",
+            text: "Running",
             type: "label"
           }, {
             icon: 'fa-solid fa-terminal',
