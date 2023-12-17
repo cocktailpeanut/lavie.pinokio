@@ -28,7 +28,7 @@ module.exports = {
             params: { fullscreen: true }
           }, {
             icon: "fa-solid fa-rocket",
-            text: "Start",
+            text: "Open Web UI",
             href: session.url,
             target: "_blank"
           }]
