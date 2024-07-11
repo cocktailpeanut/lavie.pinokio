@@ -8,6 +8,7 @@ module.exports = {
     let running = await kernel.running(__dirname, "start.json")
     if (installing) {
       return [{
+        default: true,
         icon: "fa-solid fa-plug",
         text: "Installing",
         href: "install.json",
@@ -27,6 +28,7 @@ module.exports = {
             href: "start.json",
             params: { fullscreen: true }
           }, {
+            default: true,
             icon: "fa-solid fa-rocket",
             text: "Open Web UI",
             href: session.url,
@@ -38,6 +40,7 @@ module.exports = {
             text: "Running",
             type: "label"
           }, {
+            default: true,
             icon: 'fa-solid fa-terminal',
             text: "Terminal",
             href: "start.json",
@@ -46,6 +49,7 @@ module.exports = {
         }
       } else {
         return [{
+          default: true,
           icon: "fa-solid fa-power-off",
           text: "Start",
           href: "start.json",
@@ -54,6 +58,7 @@ module.exports = {
       }
     } else {
       return [{
+        default: true,
         icon: "fa-solid fa-plug",
         text: "Install",
         href: "install.json",
